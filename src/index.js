@@ -5,13 +5,13 @@ const content = document.querySelector('.content');
 const placesList = content.querySelector('.places__list');
 
 //Функция создания карточки.
-function addCard(cardsList, onDelete) {
+function addCard(cardData, onDelete) {
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   const deleteButton = card.querySelector('.card__delete-button');
   const cardImage = card.querySelector('.card__image')
-  card.querySelector('.card__title').textContent = cardsList.name;
-  cardImage.src = cardsList.link; 
-  cardImage.alt = cardsList.name
+  card.querySelector('.card__title').textContent = cardData.name;
+  cardImage.src = cardData.link; 
+  cardImage.alt = cardData.name
 
   deleteButton.addEventListener('click', () => {
     onDelete(card);
@@ -35,3 +35,5 @@ function showCards() {
 showCards();
 
 
+
+import './pages/index.css'; // добавьте импорт главного файла стилей 
