@@ -1,3 +1,5 @@
+import './pages/index.css';
+import { initialCards } from './components/cards.js';
 //Темплейт карточки.
 const cardTemplate = document.querySelector('#card-template').content;
 //DOM узлы.
@@ -36,4 +38,4 @@ showCards();
 
 
 
-import './pages/index.css'; // добавьте импорт главного файла стилей 
+ // добавьте импорт главного файла стилей 
