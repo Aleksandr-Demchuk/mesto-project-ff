@@ -1,41 +1,24 @@
 import './pages/index.css';
-import { initialCards } from './components/cards.js';
-//Темплейт карточки.
-const cardTemplate = document.querySelector('#card-template').content;
-//DOM узлы.
-const content = document.querySelector('.content');
-const placesList = content.querySelector('.places__list');
+import {
+  addCard,
+  deleteCard,
+  showCards,
+  placesList,
+} from './components/card';
 
-//Функция создания карточки.
-function addCard(cardData, onDelete) {
-  const card = cardTemplate.querySelector('.card').cloneNode(true);
-  const deleteButton = card.querySelector('.card__delete-button');
-  const cardImage = card.querySelector('.card__image')
-  card.querySelector('.card__title').textContent = cardData.name;
-  cardImage.src = cardData.link; 
-  cardImage.alt = cardData.name
+import {openModal, closeModal} from './components/modal';
 
-  deleteButton.addEventListener('click', () => {
-    onDelete(card);
-  });
-
-  return card;
-}
-
-//Функция удаления карточки.
-function deleteCard(removeData) {
-  removeData.remove();
-}
-
-//Вывод карточки на страницу.
-function showCards() {
-  initialCards.forEach(function(item) {
-    const result = addCard(item, deleteCard);
-    placesList.append(result);
-  });
-}
 showCards();
 
+const profileEdit = document.querySelector('.profile__edit-button');
+const popupTypeEdit = document.querySelector('.popup_type_edit')
+const closeCrossButton = document.querySelectorAll(".popup__close");
 
+profileEdit.addEventListener('click', () => {
+  openModal(popupTypeEdit);
+});
 
- // добавьте импорт главного файла стилей 
+closeCrossButton.forEach((item) => {
+  const close = item.closest('.popup');
+  item.addEventListener('click', () => closeModal(close));
+});
