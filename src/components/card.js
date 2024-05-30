@@ -1,45 +1,42 @@
-import { initialCards } from './cards.js';
 
-//Темплейт карточки.
 const cardTemplate = document.querySelector('#card-template').content;
-//DOM узлы.
-const content = document.querySelector('.content');
-const placesList = content.querySelector('.places__list');
 
-//Функция создания карточки.
-function addCard(cardData, onDelete) {
-    const card = cardTemplate.querySelector('.card').cloneNode(true);
-    const deleteButton = card.querySelector('.card__delete-button');
-    const cardImage = card.querySelector('.card__image');
+function addCard(cardData, onDelete, onLike, showImage) {
+  const card = cardTemplate.querySelector('.card').cloneNode(true);
+  const deleteButton = card.querySelector('.card__delete-button');
+  const cardImage = card.querySelector('.card__image');
+  const Likecard = card.querySelector('.card__like-button');
 
-    card.querySelector('.card__title').textContent = cardData.name;
-    cardImage.src = cardData.link; 
-    cardImage.alt = cardData.name
-  
-    deleteButton.addEventListener('click', () => {
-      onDelete(card);
-    });
-  
-    return card;
-  }
+  card.querySelector('.card__title').textContent = cardData.name;
+  cardImage.src = cardData.link; 
+  cardImage.alt = cardData.name;
 
-  //Функция удаления карточки.
+  deleteButton.addEventListener('click', () => {
+    onDelete(card);
+  });
+
+  cardImage.addEventListener('click', () => {
+    showImage(cardData);
+  });
+
+  Likecard.addEventListener('click', () => onLike(Likecard));
+
+  return card;
+}
+
 function deleteCard(removeData) {
     removeData.remove();
   }
 
-  //Вывод карточки на страницу.
-function showCards() {
-    initialCards.forEach(function(item) {
-      const result = addCard(item, deleteCard);
-      placesList.append(result);
-    });
-  }
-  
-  export {
-    addCard,
-    deleteCard,
-    showCards,
-    placesList,
-  };
+function likeIconCard(likeIcon) {
+  likeIcon.classList.toggle('card__like-button_is-active');
+}
+
+
+export {
+  addCard,
+  deleteCard,
+  likeIconCard
+  // placesList,
+};
   
