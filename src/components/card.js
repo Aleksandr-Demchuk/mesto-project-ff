@@ -1,4 +1,3 @@
-
 const cardTemplate = document.querySelector('#card-template').content;
 
 function addCard(cardData, onDelete, onLike, showImage) {
@@ -32,11 +31,9 @@ function likeIconCard(likeIcon) {
   likeIcon.classList.toggle('card__like-button_is-active');
 }
 
-
 export {
   addCard,
   deleteCard,
   likeIconCard
-  // placesList,
 };
   
