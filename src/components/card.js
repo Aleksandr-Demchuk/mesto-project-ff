@@ -1,6 +1,6 @@
 const cardTemplate = document.querySelector('#card-template').content;
 
-function addCard(cardData, onDelete, onLike, showImage) {
+function createCard(cardData, onDelete, onLike, showImage) {
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   const deleteButton = card.querySelector('.card__delete-button');
   const cardImage = card.querySelector('.card__image');
@@ -32,7 +32,7 @@ function likeIconCard(likeIcon) {
 }
 
 export {
-  addCard,
+  createCard,
   deleteCard,
   likeIconCard
 };

@@ -1,7 +1,7 @@
 import { initialCards } from './components/cards';
 import './pages/index.css';
 import {
-  addCard,
+  createCard,
   deleteCard,
   likeIconCard
 } from './components/card';
@@ -13,7 +13,7 @@ const placesList = content.querySelector('.places__list');
 const profileEdit = document.querySelector('.profile__edit-button');
 const profileAdd = document.querySelector('.profile__add-button');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
-const closeCrossButton = document.querySelectorAll('.popup__close');
+const closeCrossButtons = document.querySelectorAll('.popup__close');
 const openNewCard = document.querySelector('.popup_type_new-card');
 const openImage = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
@@ -45,14 +45,16 @@ function defaultProfileInputs() {
   function createNewCard(item) {
     item.preventDefault();
     
+    
     const makeCard = {
       name: newCardName.value,
       link: newCardLink.value
     };
-    const card = addCard(makeCard, deleteCard, likeIconCard, showImage);
+    const card = createCard(makeCard, deleteCard, likeIconCard, showImage);
     placesList.prepend(card);
-
+    item.target.reset();
     closeModal(openNewCard);
+    
   }
 
   function showImage(image) {
@@ -64,13 +66,13 @@ function defaultProfileInputs() {
 
   function showCards() {
     initialCards.forEach(function(item) {
-    const result = addCard(item, deleteCard, likeIconCard, showImage);
+    const result = createCard(item, deleteCard, likeIconCard, showImage);
     placesList.append(result);
     });
   }
   showCards();
 
-  closeCrossButton.forEach((item) => {
+  closeCrossButtons.forEach((item) => {
     const close = item.closest('.popup');
     item.addEventListener('click', () => closeModal(close));
   });
