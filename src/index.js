@@ -7,6 +7,8 @@ import {
 } from './components/card';
 import {openModal, closeModal} from './components/modal';
 
+import { enableValidation , clearValidation } from './components/validation';
+
 const content = document.querySelector('.content');
 const placesList = content.querySelector('.places__list');
 
@@ -27,7 +29,26 @@ const profileDescription = document.querySelector('.profile__description');
 const newCardName =  formAddCard.querySelector('.popup__input_type_card-name');
 const newCardLink = formAddCard.querySelector('.popup__input_type_url');
 
+const avatarProfileButton = document.querySelector('.profile__avatar-button');
+const avatarEditForm = document.forms['edit-avatar'];
+const avatarEditPopup = document.querySelector('.popup_type_edit_avatar');
 
+
+const validationItemsList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
+enableValidation(validationItemsList);
+
+avatarProfileButton.addEventListener('click', (iteme) => {
+  avatarEditForm.reset();
+  openModal(avatarEditPopup);
+})
 
 function profileFormSubmit(item) {
   item.preventDefault();
