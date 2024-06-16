@@ -32,9 +32,10 @@ const newCardLink = formAddCard.querySelector('.popup__input_type_url');
 const avatarProfileButton = document.querySelector('.profile__avatar-button');
 const avatarEditForm = document.forms['edit-avatar'];
 const avatarEditPopup = document.querySelector('.popup_type_edit_avatar');
+const newCardForm = document.forms["new-place"];
 
 
-const validationItemsList = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -43,12 +44,13 @@ const validationItemsList = {
   errorClass: 'popup__error_visible',
 };
 
-enableValidation(validationItemsList);
+enableValidation(validationConfig);
 
-avatarProfileButton.addEventListener('click', (iteme) => {
+avatarProfileButton.addEventListener('click', (item) => {
   avatarEditForm.reset();
   openModal(avatarEditPopup);
-})
+  clearValidation(newCardForm, validationConfig);
+});
 
 function profileFormSubmit(item) {
   item.preventDefault();
