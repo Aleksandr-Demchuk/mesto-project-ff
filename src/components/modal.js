@@ -5,7 +5,7 @@ const openModal = (item) => {
     document.addEventListener('keydown', handleEscape);
 };
 
-const closeModal = (item) => {
+const closeModal  = (item) => {
     item.classList.remove('popup_is-opened');
     item.removeEventListener('mousedown', closeModalByClick);
     document.removeEventListener('keydown', handleEscape);
@@ -14,14 +14,14 @@ const closeModal = (item) => {
 const handleEscape = (item) => {
     if (item.key === 'Escape') {
         const popupOpened = document.querySelector('.popup_is-opened');
-        closeModal(popupOpened);
+        closeModal (popupOpened);
     }
 };
 
 const closeModalByClick = (item) => {
     if (item.target === item.currentTarget ) {
-        closeModal(item.target);
+        closeModal (item.target);
     }
 };
 
-export { openModal, closeModal};
+export {openModal, closeModal };
