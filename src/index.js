@@ -1,5 +1,4 @@
 import './pages/index.css';
-
 import {
   getUser,
   getInitialCards,
@@ -7,7 +6,6 @@ import {
   addNewCard,
   updateProfileImage
 } from './components/api.js';
-import { initialCards } from './components/cards.js';
 import { createCard, toggleLike, deleteCard } from './components/card.js';
 import { openModal, closeModal } from './components/modal.js';
 import { clearValidation, enableValidation } from './components/validation.js';
@@ -124,7 +122,7 @@ formAddCard.addEventListener('submit', (item) => {
   addNewCard(placeNameInput.value, imageSrcInput.value)
     .then((res) => {
       placesList.prepend(
-        createCard(res, deleteCard, toggleLike, viewImagePopup, res.owner)
+        createCard(res, deleteCard, toggleLike, viewImagePopup, res.owner, userId)
       );
       formAddCard.reset();
       closeModal(newCardPopup);
@@ -154,23 +152,20 @@ popups.forEach((popup) => {
   });
 });
 
+let userId;
+
 Promise.all([getUser(), getInitialCards()])
-  .then(([user, cards]) => {
+  .then(([user, initialCards]) => {
+    userId = user._id;
     profileTitle.textContent = user.name;
     profileDescription.textContent = user.about;
     profileImage.style.backgroundImage = `url("${user.avatar}")`;
 
-    cards.forEach((card) => {
+    initialCards.forEach((card) => {
       placesList.append(
-        createCard(card, deleteCard, toggleLike, viewImagePopup, user)
+        createCard(card, deleteCard, toggleLike, viewImagePopup, user, userId)
       );
     });
   })
   .catch((err) => {
-    console.error(err);
-    initialCards.forEach((card) => {
-      placesList.append(
-        createCard(card, deleteCard, toggleLike, viewImagePopup)
-      );
-    });
-  });
+    console.error(err)});

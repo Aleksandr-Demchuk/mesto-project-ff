@@ -80,10 +80,10 @@ function updateProfileImage(link) {
 }
 
 function getResponseData(res) {
-  if (!res.ok) {
-    return Promise.reject(`Ошибка: ${res.status}`); 
+  if (res.ok) {
+    return res.json();
   }
-  return res.json();
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
 export {
